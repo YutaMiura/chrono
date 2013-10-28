@@ -8,12 +8,19 @@
     {% endblock %}
   </head>
   <body>
-    <nav id="mainmenu" class="menu">
-      <ul>
-	<li id="mm-calendar"><a href="#">arpカレンダー</a></li>
-	<li id="mm-edit"><a href="#">勤怠情報編集</a></li>
-	<li id="mm-view"><a href="#">勤怠情報閲覧</a></li>
-	<li id="mm-general-affair"><a href="#">総務関連</a></li>
+    <header class="chrono-header">
+      <div id="chrono-logo">Chrono System</div>
+      <div id="user-info">
+	名前：XXX XXX
+	社員番号：10XXX
+      </div>
+    </header>
+    <nav id="mainmenu" class="chrono-header">
+      <ul id="mm-ul" class="clearfix">
+	<li id="mm-calendar" class="mm-li"><a href="#">arpカレンダー</a></li>
+	<li id="mm-edit" class="mm-li"><a href="#">勤怠情報編集</a></li>
+	<li id="mm-view" class="mm-li"><a href="#">勤怠情報閲覧</a></li>
+	<li id="mm-general-affair" class="mm-li"><a href="#">総務関連</a></li>
       </ul>
     </nav>
     <div id="container">
