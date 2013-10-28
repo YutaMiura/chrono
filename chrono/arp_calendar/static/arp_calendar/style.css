@@ -13,11 +13,11 @@ td.daycell {
 td.noday.daycell {
 }
 
-div.dayContent div.statutory_holiday {
+div.daycontent div.statutory_holiday {
     border: 1px red solid;
 }
 
-div.dayContent div.not_statutory_holiday {
+div.daycontent div.not_statutory_holiday {
     border: 1px blue solid;
 }
 
