@@ -13,16 +13,19 @@ td.daycell {
 td.noday.daycell {
 }
 
-div.daycontent div.statutory_holiday {
-    border: 1px red solid;
+td.statutory_holiday {
+    /* border: 1px red solid; */
+    background-color: #ff7578;
 }
 
-div.daycontent div.not_statutory_holiday {
-    border: 1px blue solid;
+td.not_statutory_holiday {
+    /* border: 1px blue solid; */
+    background-color: #759eff;
 }
 
-div.daycontent div.other_day {
-    border: 1px green solid;
+td.daycontent div.other_day {
+    /* border: 1px green solid; */
+    background-color: green;
 }
 
 div.daynumber {

@@ -53,40 +53,37 @@ class ARPHTMLCalendar(HTMLCalendar):
         the_dayは日付をですが，当月に含まれない日付の場合0(int)です．
         """
 
+        holiday_type_name = ''
         holiday_content = ''
         idx_sun = len(self.cssclasses) - 1
         idx_sat = idx_sun - 1
 
         if css_class == self.cssclasses[idx_sun]:
             # statutory holiday
-            holiday_content = self.get_holiday_content(1) 
+            holiday_type_name = HolidayType.objects.get(pk=1).name_en
         elif css_class == self.cssclasses[idx_sat]:
             # not statutory holiday
-            holiday_content = self.get_holiday_content(2)
+            holiday_type_name = HolidayType.objects.get(pk=2).name_en
 
         for holiday in self.holidays:
             if holiday.date.day == the_day:
-                holiday_content = (
-                    self.get_holiday_content(
-                        holiday.holiday_type_id,
-                        holiday.name
-                    )
-                )
+                ht = HolidayType.objects.get(pk=holiday.holiday_type_id)
+                holiday_type_name = ht.name_en
+                holiday_content = holiday.name
                 
         day_cell_format = '''
-        <td class="%s daycell" date="%d" halign="left" valign="top">
+        <td class="%s daycell %s" date="%d" halign="left" valign="top">
             %s
             <div class="daycontent">%s</div>
         </td>
         '''
 
         return (day_cell_format % 
-                (css_class, the_day, body, holiday_content))
-
-    def get_holiday_content(self, holiday_type, name=''):
-        ht = HolidayType.objects.get(pk=holiday_type)
-        content = '<div class="%s">%s</div>' % (ht.name_en, name)
-        return content.encode('utf-8')
+                (css_class, 
+                 holiday_type_name,
+                 the_day, body,
+                 holiday_content)).encode('utf-8')
+        
 
 def list_calendar(request, year=None, month=None):
     """
