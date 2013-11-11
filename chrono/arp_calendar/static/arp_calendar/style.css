@@ -1,5 +1,25 @@
-table.month {
+@charset "utf-8";
+
+.calendar_navi {
+    margin: 2em 0 0 0;
+    margin-left: auto;
+    margin-right: auto;
     width: 90%;
+}
+
+.calendar_navi_element {
+    margin: 5px;
+    float: left;
+}
+
+.content {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table.month {
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -30,4 +50,18 @@ td.daycontent div.other_day {
 
 div.daynumber {
     padding-left: 5px;
+}
+
+// for clear the float layout
+.clearfix {
+    *zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    content: "";
+    line-height: 0;
+}
+.clearfix:after {
+    clear: both;
 }

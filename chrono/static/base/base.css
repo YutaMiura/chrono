@@ -9,6 +9,10 @@ body {
     background-color: #4f4f5f;
 }
 
+#user-info {
+    text-align: right;
+}
+
 #mm-ul {
     list-style:none;
     margin: 0;
