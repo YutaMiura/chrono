@@ -133,6 +133,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     # 'debug_toolbar',
     'arp_calendar',
+    'test_calendar',
 )
 
 # A sample logging configuration. The only tangible logging

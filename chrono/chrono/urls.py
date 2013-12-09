@@ -14,5 +14,6 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^calendar/', include('arp_calendar.urls')),
+    url(r'^calendar/', include('arp_calendar.urls', namespace='arp_calendar')),
+    url(r'^test_calendar/', include('test_calendar.urls', namespace="test_calendar")),
 )

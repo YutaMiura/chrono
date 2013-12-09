@@ -8,62 +8,38 @@
 {% block scripts %}
 {{ block.super }}
 <script type="text/javascript" src="{% static 'arp_calendar/jquery-1.9.1.js' %}"></script>
+<script type="text/javascript" src="{% static 'arp_calendar/arp_calendar.js'%}"></script>
 {% endblock %}
 
 {% block content %}
 <div class="calendar_navi clearfix">
-  <form id="select_form" action="/calendar/list/2013/09/" method="get">
+  <form id="list_calendar" action="{% url 'arp_calendar:list_calendar' %}" method="post">
   {% csrf_token %}
-    <select class="calendar_navi_element" id="select_year">
-      <option value="2012">2012</option>
-      <option value="2013">2013</option>
+    <select id="select_year" name="select_year" class="calendar_navi_element">
+    {% for year in years %}
+      {% if year == selected_year %}
+        <option value="{{ year }}" selected>{{ year }}</option>
+      {% else %}
+        <option value="{{ year }}">{{ year }}</option>
+      {% endif %}
+    {% endfor %}
     </select>
     <div class="calendar_navi_element" id="label_year">年</div>
-    <select class="calendar_navi_element" id="select_month">
-      <option value="01">1</option>
-      <option value="02">2</option>
-      <option value="03">3</option>
-      <option value="04">4</option>
-      <option value="05">5</option>
-      <option value="06">6</option>
-      <option value="07">7</option>
-      <option value="08">8</option>
-      <option value="09">9</option>
-      <option value="10">10</option>
-      <option value="11">11</option>
-      <option value="12">12</option>
+    <select id="select_month" name="select_month" class="calendar_navi_element">
+      {% for month in months %}
+        {% if month == selected_month %}
+          <option value="{{ month }}" selected>{{ month }}</option>
+        {% else %}
+          <option value="{{ month }}">{{ month }}</option>
+        {% endif %}
+      {% endfor %}
     </select>
     <div class="calendar_navi_element" id="label_month">月</div>
-    <input type="submit" id="select_submit" value="submit">
+    <input type="submit" id="select_submit" value="表示">
   </form>
   <div class="calendar_navi_element" id="prev_month">前月</div>
   <div class="calendar_navi_element" id="next_month">次月</div>
 </div>
-
-<form>
-  <input type="button" id="sample" value="Sample">
-</form>
-<script type="text/javascript">
-  $("#sample").click(function(){
-  console.log("clicked!!" + $("#select_year").val() + "/" + $("#select_month").val());
-//  $.ajax({
-//    url: "/calendar/list/" + $("#select_year").val() + "/" + $("#select_month").val(),
-//    type: "GET",
-//    dataType: "html",
-//    success: function (data) {
-//      $(document).html(data);
-//      //console.log(data);
-//    },
-//    error: function (xhr, status, error) {
-//      console.log(status);
-//    },
-//  });
-    var form = $("#select_form");
-    form.action = "/calendar/list/" + $("#select_year").val() + "/" + $("#select_month").val();
-    form.method = "get";
-    form.submit();
-  });
-</script>
 
 <div class="content">
 {{ month_html }}

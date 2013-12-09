@@ -15,6 +15,9 @@ class ARPHTMLCalendar(HTMLCalendar):
     ARPカレンダーをHTMLで表現するクラスです．
     '''
 
+    years = [2012,2013,2014]
+    months = [1,2,3,4,5,6,7,8,9,10,11,12]
+
     def __init__(self, firstweekday):
         """
         constructor
@@ -85,33 +88,32 @@ class ARPHTMLCalendar(HTMLCalendar):
                  holiday_content)).encode('utf-8')
         
 
-def list_calendar(request, year=None, month=None):
+def list_calendar(request):
     """
     指定年月のカレンダーを表示します．
     """
-
     # Short cut version index view.
     # render() function takes following arguments:
     #  1. request object
     #  2. template name
     #  3. dictionaly represents the context
     # It returns an HttpRequest object 
-    if year:
-        year = int(year)
-    else:
-        year = date.today().year
-    if month:
-        month = int(month)
-    else:
-        month = date.today().month
+    try:
+        selected_year = int(request.POST['select_year'])
+        selected_month = int(request.POST['select_month'])
+    except KeyError:
+        selected_year = date.today().year
+        selected_month = date.today().month
 
     month_html = mark_safe(
         ARPHTMLCalendar(calendar.SUNDAY)
-        .formatmonth(year, month))
+        .formatmonth(selected_year, selected_month))
 
-    context = { 
-        'year': year,
-        'month': month,
+    context = {
+        'years': ARPHTMLCalendar.years,
+        'months': ARPHTMLCalendar.months,
+        'selected_year': selected_year,
+        'selected_month': selected_month,
         'month_html': month_html
     }
     return render(request, 'arp_calendar/list.html', context)
